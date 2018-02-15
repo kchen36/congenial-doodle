@@ -1,0 +1,5 @@
+from pymongo import MongoCLient
+import json
+file = open("pokedex.json", 'r')
+json.load(file)
+client = MongoCLient("homer.stuy.edu")
