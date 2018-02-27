@@ -17,12 +17,16 @@ def search():
         pokemons = find(name)
     elif request.form['method'] == 'id':
         pokemons = findid(name)
+    if pokemons[0]['next_evolution'] = None:
+        evo = "no evolution"
+    else:
+        evo = pokemons[0]['next_evolution'][0]['name']
     return render_template("base.html",
                            pokemon = pokemons[0]['name'],
                            img = pokemons[0]['img'],
                            weight = pokemons[0]['weight'],
                            height = pokemons[0]['height'],
-                           evolution = pokemons[0]['next_evolution'][0]['name'])
+                           evolution = evo)
 
 file = open("pokedex.json", 'r')
 pokedex = json.load(file)
