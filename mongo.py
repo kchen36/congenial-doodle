@@ -15,8 +15,6 @@ def search():
         pokemons = findevo(name)
     if request.form['method'] == 'name':
         pokemons = find(name)
-    if request.form['method'] == 'type':
-        pokemons = findtype(name)
     elif request.form['method'] == 'id':
         pokemons = findid(name)
     return render_template("base.html",
