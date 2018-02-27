@@ -1,19 +1,37 @@
 from pymongo import MongoClient
 import json
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 app = Flask(__name__)
-@app.route('/search')
-def search():
+
+@app.route('/')
+def root():
     return render_template("base.html")
-@app.route('/pokemon')
-def pokemon():
-    return render_template("base.html"
+
+@app.route('/search', methods = ['POST', 'GET'])
+def search():
+    
+    name = request.form['search']
+    if request.form['method'] == 'evo':
+        pokemons = findevo(name)
+    if request.form['method'] == 'name':
+        pokemons = find(name)
+    if request.form['method'] == 'type':
+        pokemons = findtype(name)
+    elif request.form['method'] == 'id':
+        pokemons = findid(name)
+    return render_template("base.html",
+                           pokemon = pokemons[0]['name'],
+                           img = pokemons[0]['img'],
+                           weight = pokemons[0]['weight'],
+                           height = pokemons[0]['height'],
+                           evolution = pokemons[0]['next_evolution'][0]['name'])
+
 file = open("pokedex.json", 'r')
 pokedex = json.load(file)
 client = MongoClient("homer.stuy.edu")
 
 db = client['pokedex']
-db.dropDatabase()
+db.dropDatabase
 db = client['pokedex']
 collection = db.pokemon
 for i in pokedex:
@@ -36,5 +54,5 @@ def p(x):
 	print i
     
 if __name__ == "__main__":
-	app.debug = True
+    app.debug = True
     app.run()

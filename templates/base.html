@@ -6,8 +6,8 @@
   </head>
 
   <body>
-    <form method = "POST" action = "/pokemon">
-      <select>
+    <form method = "POST" action = "/search">
+      <select name="method">
 	<option value="evo">evolutions</option>
 	<option value="name">name</option>
 	<option value="type">attribute</option>
@@ -16,7 +16,15 @@
       search:<input type="text" name="search">
       <input type="submit" value="Submit">
       <br>
-      
+      {{pokemon}}
+      <br>
+      <img src={{img}}>
+      <br>
+      weight: {{weight}}
+      <br>
+      height: {{height}}
+      <br>
+      evolution:{{evolution}}
     </form>
   </body>
 </html>
